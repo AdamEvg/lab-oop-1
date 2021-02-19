@@ -33,6 +33,7 @@ TApplication::TApplication()
                 case 3:{
                     TPolinom p(a,b,c);
                     number* x=p.getRoots();
+                    cout<<p.getA()<<p.getB()<<p.getC();
                     if(isIntegerRoots(x,p.getQuantityOfRoots(),p.getA(),p.getB(),p.getC())){
                         if(p.getQuantityOfRoots()==2){
                             cout<<"There are two roots:"<<" "

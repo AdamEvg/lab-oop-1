@@ -11,10 +11,10 @@ TPolinom::TPolinom(number a,number b,number c)
     this->c = c;
 }
 number TPolinom::getA(){
-    return this->c;
+    return this->a;
 }
 number TPolinom::getB(){
-    return this->c;
+    return this->b;
 }
 number TPolinom::getC(){
     return this->c;
@@ -127,9 +127,25 @@ ostream& operator << (ostream& os, TPolinom& p){
     number*roots = p.getRoots();
     if(p.printMode == EPrintModeCanonic){
         if(p.getQuantityOfRoots()==2){
-             os<<p.a<<"(x-"<<roots[0]<<")"<<"(x-"<<roots[1]<<")";
+            if (roots[0]>0 && roots[1]>0){
+            os<<p.a<<"*"<<"(x-"<<roots[0]<<")"<<"*"<<"(x-"<<roots[1]<<")";
+            }
+            else if(roots[0]<0 && roots[1]<0){
+             os<<p.a<<"*"<<"(x+"<<-roots[0]<<")"<<"*"<<"(x+"<<-roots[1]<<")";
+            }
+            else if(roots[0]<0 && roots[1]>0){
+             os<<p.a<<"*"<<"(x+"<<-roots[0]<<")"<<"*"<<"(x-"<<roots[1]<<")";
+            }
+            else if(roots[0]>0 && roots[1]<0){
+             os<<p.a<<"*"<<"(x-"<<roots[0]<<")"<<"*"<<"(x+"<<-roots[1]<<")";
+            }
         }else if(p.getQuantityOfRoots()==1){
-              os<<p.a<<"(x-"<<roots[0]<<")"<<"^2";
+              if (roots[0]>0){
+              os<<p.a<<"*"<<"(x-"<<roots[0]<<")"<<"^2";
+              }
+              if (roots[0]<0){
+              os<<p.a<<"*"<<"(x+"<<-roots[0]<<")"<<"^2";
+              }
         }else{
             os<<"There are not roots,\n so print with canonic mode is impossible!";
         }
