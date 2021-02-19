@@ -4,9 +4,11 @@
 
 class TApplication
 {
+
 public:
     TApplication();
     int exec();
+
 };
 
 #endif // TAPPLICATION_H
