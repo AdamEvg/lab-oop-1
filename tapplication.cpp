@@ -1,5 +1,8 @@
 #include "tapplication.h"
-
+#include "tpolinom.h"
+#include "number.h"
+#include <iostream>
+using namespace std;
 TApplication::TApplication()
 {
 
@@ -14,7 +17,7 @@ int TApplication:: exec(){
         cout <<"3- roots" << endl;
         cout <<"4- print (classic)"<< endl;
         cout <<"5- print (canonical)"<<endl;
-        cout <<"0- exit"+">"<< endl;
+        cout <<"0- exit"<<">"<< endl;
         cout <<">";
         cin >> ch;
 
@@ -29,29 +32,24 @@ int TApplication:: exec(){
             number x;
             cout <<"Enter x:" << endl;
             cout <<">"; cin >> x;
-            cout <<"P("<<x<<")="<<p.value(x) << endl;
+            cout <<"P("<<x<<")="<<p.getValue(x) << endl;
         } break;
         case 3: {
             TPolinom p(a,b,c);
-            number *x = new number[2];
-            int num_roots = p.roots(x);
-            if (num_roots == 2) {
-                cout <<"Roots:" << x[0] << "," << x[1] << endl;
-            }
-            if (num_roots == 1){
-                cout <<"Root: "<<x[0]<< endl;
-            }
-            if (num_roots == 0){
-                cout <<"No roots!" << endl;
-            }
+            number *x;
+            x = p.getRoots();
+
             delete x;
         } break;
         case 4:{
             TPolinom p(a,b,c);
+            p.setPrintMethod(EPrintModeClassic);
             cout << p << endl;
         } break;
         case 5:{
-
+            TPolinom p(a,b,c);
+            p.setPrintMethod(EPrintModeCanonic);
+            cout << p << endl;
         } break;
         default:break;
         }
@@ -59,4 +57,17 @@ int TApplication:: exec(){
             break;
         }
     return 0;
+}
+
+//Функция принимает массив корней, количество корней и 3 коэфициента полинома
+//Возвращается логическое значение, которое будет true, если существует
+//решение над полем целых чисел и false, если решения над полем вещественных чисел не существует.
+bool TApplication:: isIntegerRoots(number*roots,int quantityOfRoots,number a,number b,number c){
+    if(quantityOfRoots==2){
+        return (roots[0]+roots[1])==-(b/a) && roots[0]*roots[1]==(c/a) ;
+    }else if(quantityOfRoots==1){
+        return (roots[0]+roots[0])==-(b/a) && roots[0]*roots[0]==(c/a) ;
+    }else{
+        return false;
+    }
 }

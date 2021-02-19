@@ -1,6 +1,7 @@
 #include "tpolinom.h"
 #include "number.h"
 #include<iostream>
+#include<math.h>
 using namespace std;
 TPolinom::TPolinom(number a,number b,number c)
 {
@@ -15,9 +16,10 @@ void TPolinom::setPrintMethod(EPrintMode ePrintMethod)
     this->printMode = ePrintMethod;
 }
 
-number TPolinom::value(number x){
+number TPolinom::getValue(number x){
     return this->a*x*x+this->b+this->c;
 }
+
 int TPolinom::getQuantityOfRoots(){
     if(getDiscriminant()>0){
         return 2;
@@ -40,8 +42,11 @@ number* TPolinom::getRoots(){
     number * roots;
     if(getQuantityOfRoots()==2){
         roots = new int[2];
+        roots[0] = (-b + sqrt(getDiscriminant()))/(2*a);
+        roots[1] = (-b - sqrt(getDiscriminant()))/(2*a);
     }else if(getQuantityOfRoots()==1){
         roots = new int[1];
+         roots[0] = -b/(2*a);
     }else{
         roots = NULL;
     }

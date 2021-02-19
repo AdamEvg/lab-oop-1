@@ -13,13 +13,14 @@ class TPolinom
     //Область видимости по умолчанию приватная
     EPrintMode printMode;
     number a,b,c;
-    int getQuantityOfRoots();
+
     number getDiscriminant();
 public:
     TPolinom();
     TPolinom(number,number,number);
+    int getQuantityOfRoots();
     friend ostream& operator << (ostream&, TPolinom&);
-    number value(number);
+    number getValue(number);
     void setPrintMethod(EPrintMode);
     number *getRoots();
 };
