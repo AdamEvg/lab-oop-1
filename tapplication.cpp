@@ -7,11 +7,74 @@ TApplication::TApplication()
 {
 
 }
-int TApplication:: exec(){
-    int ch;
-    number a=1, b=-2, c=1;
-    while (true)
-    {
+
+
+    void TApplication:: exec(){
+        int ch;
+        number a=1, b=-2, c=1;
+            while (true){
+                ch = menu();
+                switch (ch){
+                case 1:{
+                    cout <<"Enter a,b,c:" << endl;
+                    cout << ">"; cin >>a>>b>>c;
+                    break;
+                }
+                case 2:{
+                        TPolinom p(a,b,c);
+                        number x;
+                        cout <<"Enter x:" << endl;
+                        cout <<">";
+                        cin >> x;
+                        cout <<"P("<<x<<")="<<p.getValue(x) << endl;
+                        break;
+                }
+
+                case 3:{
+                    TPolinom p(a,b,c);
+                    number* x=p.getRoots();
+                    if(isIntegerRoots(x,p.getQuantityOfRoots(),p.getA(),p.getB(),p.getC())){
+                        if(p.getQuantityOfRoots()==2){
+                            cout<<"There are two roots:"<<" "
+                                <<"x1="<<x[0]<<"\t"<<"x2="<<x[1];
+                        }
+                        if(p.getQuantityOfRoots()==1){
+                             cout<<"There is one root:"<<" ""x="<<x[0];
+                        }
+                    }else{
+                        cout<<"There are not roots on field on integer numbers";
+                    }
+                    delete x;
+                     break;
+                }
+                case 4:
+                {
+                    TPolinom p(a,b,c);
+                    p.setPrintMethod(EPrintModeClassic);
+                    cout << p << endl;
+                    break;
+                }
+
+                case 5:{
+                    TPolinom p(a,b,c);
+                    p.setPrintMethod(EPrintModeCanonic);
+                    cout << p << endl;
+                    break;
+                }
+                case 0:{
+                    return;
+                }
+
+                default:{
+                     break;
+                }
+
+                }
+            }
+        }
+
+    int TApplication::menu(){
+        int ch;
         cout <<"1- coefficients" << endl;
         cout <<"2- value" << endl;
         cout <<"3- roots" << endl;
@@ -20,48 +83,8 @@ int TApplication:: exec(){
         cout <<"0- exit"<<">"<< endl;
         cout <<">";
         cin >> ch;
-
-        switch(ch)
-        {
-        case 1: {
-            cout <<"Enter a,b,c:" << endl;
-            cout << ">"; cin >>a>>b>>c;
-        } break;
-        case 2: {
-            TPolinom p(a,b,c);
-            number x;
-            cout <<"Enter x:" << endl;
-            cout <<">"; cin >> x;
-            cout <<"P("<<x<<")="<<p.getValue(x) << endl;
-        } break;
-        case 3: {
-            TPolinom p(a,b,c);
-            number *x;
-            x = p.getRoots();
-            if(isIntegerRoots(x,p.getQuantityOfRoots(),p.getA(),p.getB(),p.getC())){
-                //TODO напечатать корни в зависимости от того, что вернет getQuantityOfRoots()
-            }else{
-                //TODO корней над полем целых чисел нет
-            }
-            delete x;
-        } break;
-        case 4:{
-            TPolinom p(a,b,c);
-            p.setPrintMethod(EPrintModeClassic);
-            cout << p << endl;
-        } break;
-        case 5:{
-            TPolinom p(a,b,c);
-            p.setPrintMethod(EPrintModeCanonic);
-            cout << p << endl;
-        } break;
-        default:break;
-        }
-        if (ch == 0)
-            break;
-        }
-    return 0;
-}
+        return ch;
+    }
 
 //Функция принимает массив корней, количество корней и 3 коэфициента полинома
 //Возвращается логическое значение, которое будет true, если существует
