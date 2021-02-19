@@ -10,7 +10,15 @@ TPolinom::TPolinom(number a,number b,number c)
     this->b = b;
     this->c = c;
 }
-
+number TPolinom::getA(){
+    return this->c;
+}
+number TPolinom::getB(){
+    return this->c;
+}
+number TPolinom::getC(){
+    return this->c;
+}
 void TPolinom::setPrintMethod(EPrintMode ePrintMethod)
 {
     this->printMode = ePrintMethod;

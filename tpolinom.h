@@ -21,6 +21,9 @@ public:
     int getQuantityOfRoots();
     friend ostream& operator << (ostream&, TPolinom&);
     number getValue(number);
+    number getA();
+    number getB();
+    number getC();
     void setPrintMethod(EPrintMode);
     number *getRoots();
 };

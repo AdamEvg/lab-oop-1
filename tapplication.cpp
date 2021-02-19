@@ -38,7 +38,11 @@ int TApplication:: exec(){
             TPolinom p(a,b,c);
             number *x;
             x = p.getRoots();
-
+            if(isIntegerRoots(x,p.getQuantityOfRoots(),p.getA(),p.getB(),p.getC())){
+                //TODO напечатать корни в зависимости от того, что вернет getQuantityOfRoots()
+            }else{
+                //TODO корней над полем целых чисел нет
+            }
             delete x;
         } break;
         case 4:{
