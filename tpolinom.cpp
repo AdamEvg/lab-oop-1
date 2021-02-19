@@ -10,6 +10,11 @@ TPolinom::TPolinom(number a,number b,number c)
     this->c = c;
 }
 
+void TPolinom::setPrintMethod(EPrintMode ePrintMethod)
+{
+    this->printMode = ePrintMethod;
+}
+
 number TPolinom::value(number x){
     return this->a*x*x+this->b+this->c;
 }
@@ -29,6 +34,7 @@ int TPolinom::getQuantityOfRoots(){
 number TPolinom::getDiscriminant(){
     return this->b*this->b - 4*this->a*this->c;
 }
+
 
 number* TPolinom::getRoots(){
     number * roots;
@@ -101,7 +107,6 @@ ostream& operator << (ostream& os, TPolinom& p){
             }
 
         }
-        return os;
     }
 
     //TODO: Доделать канонический вид приусловии, что корни будут - => x+x1
@@ -115,14 +120,11 @@ ostream& operator << (ostream& os, TPolinom& p){
         }else{
             os<<"There are not roots,\n so print with canonic mode is impossible!";
         }
-
     }
-
+    return os;
+    delete [] roots;
 }
 
-void TPolinom::setPrintMethod(EPrintMode ePrintMethod)
-{
-    this->printMode = ePrintMethod;
-}
+
 
 
