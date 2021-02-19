@@ -74,7 +74,7 @@ ostream& operator << (ostream& os, TPolinom& p){
                         os << "";
                     if (p.c > 0)
                         os<<"+"<< p.c<<"";
-                    else
+                    else if(p.c<0)
                         os << p.c << "";
                 }
                 if (p.b < 0)
@@ -84,29 +84,28 @@ ostream& operator << (ostream& os, TPolinom& p){
                         os << "";
                     if (p.c > 0)
                         os<<"+"<< p.c<<"";
-                    else
+                    else if(p.c<0)
                         os << p.c << "";
                 }
                 if (p.b == 0)
                 {
                     if (p.c == 0)
-                        os << "";
+                        os << " ";
                     if (p.c > 0)
-                        os<<"+"<< p.c<<"";
-                    else
-                        os << p.c << "";
+                        os<<"+"<< p.c<<" ";
+                    else if(p.c<0)
+                        os << p.c << " ";
                 }
         }
-        if (p.a == 0)
-        {
-            if ((p.b > 0) || (p.b < 0))
+
+            if (p.b < 0)
             {
                 os << p.b << "x";
                 if (p.c == 0)
                     os << "";
                 if (p.c > 0)
                     os<<"+"<< p.c<<"";
-                else
+                else if(p.c<0)
                     os << p.c << "";
             }
             if (p.b == 0)
@@ -115,11 +114,9 @@ ostream& operator << (ostream& os, TPolinom& p){
                     os << "";
                 if (p.c > 0)
                     os<<"+"<< p.c<<"";
-                else
+                else if(p.c<0)
                     os << p.c << "";
             }
-
-        }
     }
 
     //TODO: Доделать канонический вид приусловии, что корни будут - => x+x1
@@ -139,12 +136,27 @@ ostream& operator << (ostream& os, TPolinom& p){
             else if(roots[0]>0 && roots[1]<0){
              os<<p.a<<"*"<<"(x-"<<roots[0]<<")"<<"*"<<"(x+"<<-roots[1]<<")";
             }
+            else if(roots[0]==0 && roots[1]<0){
+             os<<p.a<<"*"<<"x"<<"*"<<"(x+"<<-roots[1]<<")";
+            }
+            else if(roots[0]==0 && roots[1]>0){
+             os<<p.a<<"*"<<"x"<<"*"<<"(x-"<<roots[1]<<")";
+            }
+            else if(roots[0]>0 && roots[1]==0){
+             os<<p.a<<"*"<<"(x-"<<roots[0]<<")"<<"*"<<"x";
+            }
+            else if(roots[0]<0 && roots[1]==0){
+             os<<p.a<<"*"<<"(x+"<<-roots[0]<<")"<<"*"<<"x";
+            }
         }else if(p.getQuantityOfRoots()==1){
               if (roots[0]>0){
               os<<p.a<<"*"<<"(x-"<<roots[0]<<")"<<"^2";
               }
               if (roots[0]<0){
               os<<p.a<<"*"<<"(x+"<<-roots[0]<<")"<<"^2";
+              }
+              if (roots[0]==0){
+              os<< p.a<<"x^2";
               }
         }else{
             os<<"There are not roots,\n so print with canonic mode is impossible!";

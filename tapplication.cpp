@@ -18,6 +18,11 @@ TApplication::TApplication()
                 case 1:{
                     cout <<"Enter a,b,c:" << endl;
                     cout << ">"; cin >>a>>b>>c;
+                    if (a==0)
+                    {
+                        cout<<"this is not a quadratic equation";
+                        return;
+                    }
                     break;
                 }
                 case 2:{
