@@ -39,7 +39,7 @@ TApplication::TApplication()
                     TPolinom p(a,b,c);
                     number* x=p.getRoots();
                     cout<<p.getA()<<p.getB()<<p.getC();
-                    if(isIntegerRoots(x,p.getQuantityOfRoots(),p.getA(),p.getB(),p.getC())){
+                    if(p.isIntegerRoots(x,p.getQuantityOfRoots(),p.getA(),p.getB(),p.getC())){
                         if(p.getQuantityOfRoots()==2){
                             cout<<"There are two roots:"<<" "
                                 <<"x1="<<x[0]<<"\t"<<"x2="<<x[1];
@@ -95,12 +95,4 @@ TApplication::TApplication()
 //Функция принимает массив корней, количество корней и 3 коэфициента полинома
 //Возвращается логическое значение, которое будет true, если существует
 //решение над полем целых чисел и false, если решения над полем вещественных чисел не существует.
-bool TApplication:: isIntegerRoots(number*roots,int quantityOfRoots,number a,number b,number c){
-    if(quantityOfRoots==2){
-        return (roots[0]+roots[1])==-(b/a) && roots[0]*roots[1]==(c/a) ;
-    }else if(quantityOfRoots==1){
-        return (roots[0]+roots[0])==-(b/a) && roots[0]*roots[0]==(c/a) ;
-    }else{
-        return false;
-    }
-}
+

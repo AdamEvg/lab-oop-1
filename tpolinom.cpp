@@ -61,7 +61,15 @@ number* TPolinom::getRoots(){
     return roots;
 }
 
-
+bool TPolinom:: isIntegerRoots(number*roots,int quantityOfRoots,number a,number b,number c){
+    if(quantityOfRoots==2){
+        return (roots[0]+roots[1])==-(b/a) && roots[0]*roots[1]==(c/a) ;
+    }else if(quantityOfRoots==1){
+        return (roots[0]+roots[0])==-(b/a) && roots[0]*roots[0]==(c/a) ;
+    }else{
+        return false;
+    }
+}
 ostream& operator << (ostream& os, TPolinom& p){
     if(p.printMode==EPrintModeClassic){
         if ((p.a > 0) || (p.a < 0))
