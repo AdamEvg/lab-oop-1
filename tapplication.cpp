@@ -7,9 +7,7 @@ TApplication::TApplication()
 {
 
 }
-
-
-    void TApplication:: exec(){
+void TApplication:: exec(){
         int ch;
         number a=1, b=-2, c=1;
             while (true){
@@ -18,11 +16,6 @@ TApplication::TApplication()
                 case 1:{
                     cout <<"Enter a,b,c:" << endl;
                     cout << ">"; cin >>a>>b>>c;
-                    if (a==0)
-                    {
-                        cout<<"this is not a quadratic equation";
-                        return;
-                    }
                     break;
                 }
                 case 2:{
@@ -38,8 +31,7 @@ TApplication::TApplication()
                 case 3:{
                     TPolinom p(a,b,c);
                     number* x=p.getRoots();
-                    cout<<p.getA()<<p.getB()<<p.getC();
-                    if(p.isIntegerRoots(x,p.getQuantityOfRoots(),p.getA(),p.getB(),p.getC())){
+                    if(x!=NULL){
                         if(p.getQuantityOfRoots()==2){
                             cout<<"There are two roots:"<<" "
                                 <<"x1="<<x[0]<<"\t"<<"x2="<<x[1];
@@ -48,8 +40,10 @@ TApplication::TApplication()
                              cout<<"There is one root:"<<" ""x="<<x[0];
                         }
                     }else{
-                        cout<<"There are not roots on field on integer numbers";
+                        cout<<"There are not roots on field of integer numbers";
                     }
+
+
                     delete x;
                      break;
                 }

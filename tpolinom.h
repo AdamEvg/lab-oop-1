@@ -13,17 +13,14 @@ class TPolinom
     //Область видимости по умолчанию приватная
     EPrintMode printMode;
     number a,b,c;
+    bool isIntegerRoots(number*,int);
     number getDiscriminant();
 public:
     TPolinom();
     TPolinom(number,number,number);
     int getQuantityOfRoots();
     friend ostream& operator << (ostream&, TPolinom&);
-    bool isIntegerRoots(number*,int,number,number,number);
     number getValue(number);
-    number getA();
-    number getB();
-    number getC();
     void setPrintMethod(EPrintMode);
     number *getRoots();
 };

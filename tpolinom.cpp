@@ -10,22 +10,14 @@ TPolinom::TPolinom(number a,number b,number c)
     this->b = b;
     this->c = c;
 }
-number TPolinom::getA(){
-    return this->a;
-}
-number TPolinom::getB(){
-    return this->b;
-}
-number TPolinom::getC(){
-    return this->c;
-}
+
 void TPolinom::setPrintMethod(EPrintMode ePrintMethod)
 {
     this->printMode = ePrintMethod;
 }
 
 number TPolinom::getValue(number x){
-    return this->a*x*x+this->b+this->c;
+    return a*x*x+b*x+c;
 }
 
 int TPolinom::getQuantityOfRoots(){
@@ -52,16 +44,22 @@ number* TPolinom::getRoots(){
         roots = new int[2];
         roots[0] = (-b + sqrt(getDiscriminant()))/(2*a);
         roots[1] = (-b - sqrt(getDiscriminant()))/(2*a);
+        if(!isIntegerRoots(roots,2)){
+            roots = NULL;
+        }
     }else if(getQuantityOfRoots()==1){
         roots = new int[1];
          roots[0] = -b/(2*a);
+         if(!isIntegerRoots(roots,1)){
+             roots = NULL;
+         }
     }else{
         roots = NULL;
     }
     return roots;
 }
 
-bool TPolinom:: isIntegerRoots(number*roots,int quantityOfRoots,number a,number b,number c){
+bool TPolinom:: isIntegerRoots(number*roots,int quantityOfRoots){
     if(quantityOfRoots==2){
         return (roots[0]+roots[1])==-(b/a) && roots[0]*roots[1]==(c/a) ;
     }else if(quantityOfRoots==1){
@@ -84,6 +82,8 @@ ostream& operator << (ostream& os, TPolinom& p){
                         os<<"+"<< p.c<<"";
                     else if(p.c<0)
                         os << p.c << "";
+
+                    //TYTA
                 }
                 if (p.b < 0)
                 {
@@ -94,6 +94,8 @@ ostream& operator << (ostream& os, TPolinom& p){
                         os<<"+"<< p.c<<"";
                     else if(p.c<0)
                         os << p.c << "";
+
+                    //TYTA
                 }
                 if (p.b == 0)
                 {
@@ -105,6 +107,7 @@ ostream& operator << (ostream& os, TPolinom& p){
                         os << p.c << " ";
                 }
         }
+
 
             if (p.b < 0)
             {
@@ -125,6 +128,7 @@ ostream& operator << (ostream& os, TPolinom& p){
                 else if(p.c<0)
                     os << p.c << "";
             }
+
     }
 
     //TODO: Доделать канонический вид приусловии, что корни будут - => x+x1
