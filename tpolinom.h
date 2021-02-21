@@ -10,7 +10,6 @@ enum EPrintMode{
 
 class TPolinom
 {
-    //Область видимости по умолчанию приватная
     EPrintMode printMode;
     number a,b,c;
     bool isIntegerRoots(number*,int);

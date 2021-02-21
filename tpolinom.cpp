@@ -34,7 +34,7 @@ int TPolinom::getQuantityOfRoots(){
 }
 
 number TPolinom::getDiscriminant(){
-    return this->b*this->b - 4*this->a*this->c;
+    return b*b - 4*a*c;
 }
 
 
@@ -70,71 +70,21 @@ bool TPolinom:: isIntegerRoots(number*roots,int quantityOfRoots){
 }
 ostream& operator << (ostream& os, TPolinom& p){
     if(p.printMode==EPrintModeClassic){
-        if ((p.a > 0) || (p.a < 0))
-        {
-                os<< p.a<<"x^2";
-                if (p.b > 0)
-                {
-                    os << "+" << p.b <<"x";
-                    if (p.c == 0)
-                        os << "";
-                    if (p.c > 0)
-                        os<<"+"<< p.c<<"";
-                    else if(p.c<0)
-                        os << p.c << "";
-
-                    //TYTA
-                }
-                if (p.b < 0)
-                {
-                    os << p.b << "x";
-                    if (p.c == 0)
-                        os << "";
-                    if (p.c > 0)
-                        os<<"+"<< p.c<<"";
-                    else if(p.c<0)
-                        os << p.c << "";
-
-                    //TYTA
-                }
-                if (p.b == 0)
-                {
-                    if (p.c == 0)
-                        os << " ";
-                    if (p.c > 0)
-                        os<<"+"<< p.c<<" ";
-                    else if(p.c<0)
-                        os << p.c << " ";
-                }
-        }
-
-
-            if (p.b < 0)
-            {
-                os << p.b << "x";
-                if (p.c == 0)
-                    os << "";
-                if (p.c > 0)
-                    os<<"+"<< p.c<<"";
-                else if(p.c<0)
-                    os << p.c << "";
-            }
-            if (p.b == 0)
-            {
-                if (p.c == 0)
-                    os << "";
-                if (p.c > 0)
-                    os<<"+"<< p.c<<"";
-                else if(p.c<0)
-                    os << p.c << "";
-            }
-
+           os<<p.a<<"x^2";
+           if(p.b>0){
+               os<<"+"<<p.b<<"x";
+           }else if(p.b<0){
+               os<<p.b<<"x";
+           }
+           if(p.c>0){
+               os<<"+"<<p.c;
+           }else if(p.c<0){
+               os<<p.c;
+           }
     }
-
-    //TODO: Доделать канонический вид приусловии, что корни будут - => x+x1
-    //TODO: Если корень один, надо сделать скобку, где квадрат умноженный на скобку
     number*roots = p.getRoots();
     if(p.printMode == EPrintModeCanonic){
+        if(roots!=NULL){
         if(p.getQuantityOfRoots()==2){
             if (roots[0]>0 && roots[1]>0){
             os<<p.a<<"*"<<"(x-"<<roots[0]<<")"<<"*"<<"(x-"<<roots[1]<<")";
@@ -170,12 +120,13 @@ ostream& operator << (ostream& os, TPolinom& p){
               if (roots[0]==0){
               os<< p.a<<"x^2";
               }
+        }
         }else{
-            os<<"There are not roots,\n so print with canonic mode is impossible!";
+            os<<"There are not roots on field of integer numbers,\nso print with canonic mode is impossible!";
         }
     }
-    return os;
     delete [] roots;
+    return os;
 }
 
 

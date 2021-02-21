@@ -14,8 +14,17 @@ void TApplication:: exec(){
                 ch = menu();
                 switch (ch){
                 case 1:{
-                    cout <<"Enter a,b,c:" << endl;
-                    cout << ">"; cin >>a>>b>>c;
+                    cout <<"Enter a,b,c:";
+                    cout << endl<< "a= ";
+                    cin >>a;
+                    if(a==0){
+                        cout<<"This is not square polinom";
+                        return;
+                    }
+                    cout << "b= ";
+                    cin>>b;
+                    cout<< "c= ";
+                    cin>>c;
                     break;
                 }
                 case 2:{
@@ -34,13 +43,13 @@ void TApplication:: exec(){
                     if(x!=NULL){
                         if(p.getQuantityOfRoots()==2){
                             cout<<"There are two roots:"<<" "
-                                <<"x1="<<x[0]<<"\t"<<"x2="<<x[1];
+                                <<"x1="<<x[0]<<"\t"<<"x2="<<x[1]<<endl;
                         }
                         if(p.getQuantityOfRoots()==1){
-                             cout<<"There is one root:"<<" ""x="<<x[0];
+                             cout<<"There is one root:"<<" ""x="<<x[0]<<endl;
                         }
                     }else{
-                        cout<<"There are not roots on field of integer numbers";
+                        cout<<"There are not roots on field of integer numbers"<<endl;
                     }
 
 
@@ -86,7 +95,4 @@ void TApplication:: exec(){
         return ch;
     }
 
-//Функция принимает массив корней, количество корней и 3 коэфициента полинома
-//Возвращается логическое значение, которое будет true, если существует
-//решение над полем целых чисел и false, если решения над полем вещественных чисел не существует.
 
