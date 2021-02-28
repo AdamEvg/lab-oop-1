@@ -17,10 +17,6 @@ void TApplication:: exec(){
                     cout <<"Enter a,b,c:";
                     cout << endl<< "a= ";
                     cin >>a;
-                    if(a==0){
-                        cout<<"This is not square polinom";
-                        return;
-                    }
                     cout << "b= ";
                     cin>>b;
                     cout<< "c= ";
@@ -38,22 +34,22 @@ void TApplication:: exec(){
                 }
 
                 case 3:{
-                    TPolinom p(a,b,c);
-                    number* x=p.getRoots();
-                    if(x!=NULL){
-                        if(p.getQuantityOfRoots()==2){
-                            cout<<"There are two roots:"<<" "
-                                <<"x1="<<x[0]<<"\t"<<"x2="<<x[1]<<endl;
-                        }
-                        if(p.getQuantityOfRoots()==1){
-                             cout<<"There is one root:"<<" ""x="<<x[0]<<endl;
-                        }
-                    }else{
-                        cout<<"There are not roots on field of integer numbers"<<endl;
-                    }
+//                    TPolinom p(a,b,c);
+//                    number* x=p.getRoots();
+//                    if(x!=NULL){
+//                        if(p.getQuantityOfRoots()==2){
+//                            cout<<"There are two roots:"<<" "
+//                                <<"x1="<<x[0]<<"\t"<<"x2="<<x[1]<<endl;
+//                        }
+//                        if(p.getQuantityOfRoots()==1){
+//                             cout<<"There is one root:"<<" ""x="<<x[0]<<endl;
+//                        }
+//                    }else{
+//                        cout<<"There are not roots on field of integer numbers"<<endl;
+//                    }
 
 
-                    delete x;
+//                    delete x;
                      break;
                 }
                 case 4:
