@@ -34,22 +34,23 @@ void TApplication:: exec(){
                 }
 
                 case 3:{
-//                    TPolinom p(a,b,c);
-//                    number* x=p.getRoots();
-//                    if(x!=NULL){
-//                        if(p.getQuantityOfRoots()==2){
-//                            cout<<"There are two roots:"<<" "
-//                                <<"x1="<<x[0]<<"\t"<<"x2="<<x[1]<<endl;
-//                        }
-//                        if(p.getQuantityOfRoots()==1){
-//                             cout<<"There is one root:"<<" ""x="<<x[0]<<endl;
-//                        }
-//                    }else{
-//                        cout<<"There are not roots on field of integer numbers"<<endl;
-//                    }
+                    TPolinom p(a,b,c);
+                   // cout<<p.getDiscriminant();
+                    number* x=p.getRoots();
+                    if(x!=NULL){
+                        if(p.getQuantityOfRoots()==2){
+                            cout<<"There are two roots:"<<" "
+                                <<"x1="<<x[0]<<"\t"<<"x2="<<x[1]<<endl;
+                        }
+                        if(p.getQuantityOfRoots()==1){
+                             cout<<"There is one root:"<<" ""x="<<x[0]<<endl;
+                        }
+                    }else{
+                        cout<<"There are not roots"<<endl;
+                    }
 
 
-//                    delete x;
+                    delete x;
                      break;
                 }
                 case 4:

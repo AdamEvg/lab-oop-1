@@ -12,9 +12,10 @@ class TPolinom
 {
     EPrintMode printMode;
     number a,b,c;
-    bool isIntegerRoots(number*,int);
-    number getDiscriminant();
+    bool isValidRoots(number*,int);
+
 public:
+    number getDiscriminant();
     TPolinom();
     TPolinom(number,number,number);
     int getQuantityOfRoots();
