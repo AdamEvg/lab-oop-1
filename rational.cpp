@@ -1,7 +1,7 @@
 #include "rational.h"
 #include<math.h>
 
-Rational::Rational():numerator(0),denominator(1)
+Rational::Rational()
 {
 
 }
@@ -105,8 +105,6 @@ int Rational::getNOD(const int& a1,const int& b1)
     return a+b;
 }
 
-
-
 bool Rational::operator > (int value){
     return this->numerator > value;
 }
@@ -129,7 +127,9 @@ Rational sqrt(Rational rational){
 
 ostream& operator << (ostream& os,const Rational& rational)
 {
-    if(rational.numerator % rational.denominator == 0){
+    if(rational.numerator>=0 && rational.numerator % rational.denominator == 0){
+        os<<rational.numerator/(int)rational.denominator;
+    }else if(rational.numerator<0 && (-rational.numerator) % rational.denominator == 0){
         os<<rational.numerator/(int)rational.denominator;
     }else{
         rational.numerator<0?
