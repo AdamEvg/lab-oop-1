@@ -35,7 +35,6 @@ void TApplication:: exec(){
 
                 case 3:{
                     TPolinom p(a,b,c);
-                   // cout<<p.getDiscriminant();
                     number* x=p.getRoots();
                     if(x!=NULL){
                         if(p.getQuantityOfRoots()==2){
@@ -48,7 +47,6 @@ void TApplication:: exec(){
                     }else{
                         cout<<"There are not roots"<<endl;
                     }
-
 
                     delete x;
                      break;

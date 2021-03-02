@@ -1,120 +1,147 @@
 #include "rational.h"
 #include<math.h>
 
-Rational::Rational()
+Rational::Rational():numerator(0),denominator(1)
 {
 
 }
 
-Rational::Rational(const int& r)
+Rational::Rational(const int& numerator)
 {
-    a = r;
-    b = 1;
+    this->numerator = numerator;
+    this->denominator = 1;
 }
 
-Rational Rational:: operator*(Rational rational){
-    Rational newRational;
-    newRational.a = a*rational.a;
-    newRational.b = b*rational.b;
-    reduce(newRational);
-    return newRational;
+
+Rational Rational::operator+ (const Rational& Ratio)
+{
+    int NOK = getNOK(Ratio);
+    Rational tmp;
+    int c1 = NOK/denominator, c2 = NOK/Ratio.denominator;
+    tmp.numerator = numerator*c1 + Ratio.numerator*c2;
+    tmp.denominator = NOK;
+    tmp.reduce();
+    return tmp;
 }
 
-Rational Rational:: operator*(int value){
-    Rational newRational;
-    newRational.a = a*value;
-    newRational.b = b;
-    reduce(newRational);
-    return newRational;
+Rational Rational::operator- (const Rational& Ratio)
+{
+    int NOK = getNOK(Ratio);
+    Rational tmp;
+    int c1 = NOK/denominator, c2 = NOK/Ratio.denominator;
+    tmp.numerator = numerator*c1 - Ratio.numerator*c2;
+    tmp.denominator = NOK;
+    tmp.reduce();
+    return tmp;
 }
 
-Rational Rational:: operator/(Rational rational){
-    Rational newRational;
-    newRational.a = a*rational.b;
-    newRational.b = b*rational.a;
-    reduce(newRational);
-    return newRational;
+Rational Rational::operator- (){
+    Rational tmp;
+    tmp.numerator = -numerator;
+    tmp.denominator = denominator;
+    return tmp;
 }
 
-Rational Rational:: operator+(Rational rational){
-    Rational newRational;
-    if(rational.b !=b){
-        newRational.a = a*rational.b+rational.a*b;
-        newRational.b = rational.b*b;
+Rational Rational::operator* (const Rational& Ratio)
+{
+    Rational tmp;
+    tmp.numerator = numerator*Ratio.numerator;
+    tmp.denominator = denominator*Ratio.denominator;
+    tmp.reduce();
+    return tmp;
+}
+
+Rational Rational:: operator* (const int& value){
+    Rational tmp;
+    tmp.numerator = numerator*value;
+    tmp.denominator = denominator;
+    tmp.reduce();
+    return tmp;
+}
+
+Rational Rational::operator/ (const Rational& rational){
+    Rational tmp;
+
+    if(rational.numerator<0){
+        tmp.numerator = -rational.denominator*numerator;
+        tmp.denominator = rational.numerator*denominator;
     }else{
-        newRational.a = a+rational.a;
-        newRational.b = b;
+        tmp.numerator = rational.denominator*numerator;
+        tmp.denominator = rational.numerator*denominator;
     }
-    reduce(newRational);
-    return newRational;
+
+    tmp.reduce();
+    return tmp;
 }
 
-//Бинарный минус
-Rational Rational:: operator-(Rational rational){
-    Rational newRational;
-    if(rational.b !=b){
-        newRational.a = a*rational.b-rational.a*b;
-        newRational.b = rational.b*b;
-    }else{
-        newRational.a = a-rational.a;
-        newRational.b = b;
+bool Rational::operator == (Rational rational)
+{
+    rational.reduce();
+    return (denominator==rational.denominator && numerator==rational.numerator);
+
+}
+
+unsigned int Rational::getNOK(const Rational& rational)
+{
+    return (rational.denominator*denominator)/getNOD(rational.denominator,denominator);
+}
+
+void Rational::reduce()
+{
+    int nod = getNOD(numerator,denominator);
+    numerator = numerator/nod;
+    denominator = denominator/nod;
+}
+
+int Rational::getNOD(const int& a1,const int& b1)
+{
+    int a = abs(a1), b = abs(b1);
+    while(a!=0 && b!=0){
+        if (a>=b)
+            a = a%b;
+        else
+            b = b%a;
     }
-    reduce(newRational);
-    return newRational;
-}
-
-//Унарный минус
-Rational Rational:: operator-(){
-    Rational newRational;
-    newRational.a = -a;
-    newRational.b = b;
-    return newRational;
+    return a+b;
 }
 
 
-bool Rational::operator== (Rational rational){
-    return (a==rational.a)&&(b==rational.b);
+
+bool Rational::operator > (int value){
+    return this->numerator > value;
 }
 
-bool Rational::operator== (int value){
-    return (a==value);
+bool Rational::operator < (int value){
+    return this->numerator < value;
 }
 
-bool Rational::operator>(int value){
-    return a > value;
-}
-
-bool Rational::operator<(int value){
-    return a < value;
+bool Rational::operator == (int value){
+    return this->numerator == value;
 }
 
 Rational sqrt(Rational rational){
     Rational newRational;
-    newRational.a = sqrt(rational.a);
-    newRational.b = sqrt(rational.b);
-    rational.reduce(newRational);
+    newRational.numerator = sqrt(rational.numerator);
+    newRational.denominator = sqrt(rational.denominator);
+    newRational.reduce();
     return newRational;
 }
 
-void Rational::reduce(Rational &rational){
-    int m = (rational.a < rational.b ? rational.a : rational.b );
-    while ( rational.a % m == 0 && rational.b % m == 0 && m != 1 ) rational.a /= m, rational.b /= m, --m;
-}
-
-ostream& operator << (ostream& os,Rational rational)
+ostream& operator << (ostream& os,const Rational& rational)
 {
-    if(rational.a % rational.b == 0){
-        os<<rational.a/rational.b;
+    if(rational.numerator % rational.denominator == 0){
+        os<<rational.numerator/(int)rational.denominator;
     }else{
-        os<<"("<<rational.a<<"/"<<rational.b<<")";
+        rational.numerator<0?
+                    os<<"-"<<"("<<-rational.numerator<<"/"<<rational.denominator<<")":
+                    os<<"("<<rational.numerator<<"/"<<rational.denominator<<")";
     }
-
     return os;
 }
 
 istream& operator >> (istream& is,Rational& rational)
 {
-    is>>rational.a>>rational.b;
+    is>>rational.numerator>>rational.denominator;
     return is;
 }
 

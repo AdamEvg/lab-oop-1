@@ -13,9 +13,8 @@ class TPolinom
     EPrintMode printMode;
     number a,b,c;
     bool isValidRoots(number*,int);
-
-public:
     number getDiscriminant();
+public:
     TPolinom();
     TPolinom(number,number,number);
     int getQuantityOfRoots();

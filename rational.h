@@ -3,35 +3,55 @@
 
 #include <iostream>
 using namespace std;
+
 class Rational
 {
-    int a,b;
-    //По условию b>0
-    void reduce(Rational&); //Сокращение
+    // Числитель
+    int numerator;
+
+    // Знаменатель. По условию задачи знаменатель > 0
+    unsigned int denominator;
+    // Сокращение дроби
+    void reduce();
+    // НОК
+    unsigned int getNOK(const Rational&);
+    int getNOD(const int&,const int&);
+
 public:
-    Rational();
+    Rational ();
     Rational(const int&);
 
+    // Перегруженный оператор +
+    Rational operator+ (const Rational&);
 
-    Rational operator*(Rational);//Дробь на дробь
-    Rational operator*(int);//Дробь на число
+    // Бинарный перегруженный оператор -
+    Rational operator- (const Rational&);
 
-    bool operator>(int);
-    bool operator==(int);
-    bool operator<(int);
+    // Унарный перегруженный оператор -
+    Rational operator- ();
 
-    Rational operator/(Rational);
-    Rational operator+(Rational);
+    // Перегруженный оператор *
+    Rational operator* (const Rational&);
 
-    Rational operator-();//Унарный
-    Rational operator-(Rational);//Бинарный
+    // Перегруженный оператор * на число
+    Rational operator* (const int&);
 
-    bool operator==(Rational);
+    // // Перегруженный оператор /
+    Rational operator/ (const Rational&);
 
+    // Перегруженный оператор == для сравнения дробей
+    bool operator == (Rational);
+
+    // Перегруженный операторы сравнения с числом
+    bool operator > (int);
+    bool operator < (int);
+    bool operator == (int);
+
+    //Дружественная функция вычисления корня
     friend Rational sqrt(Rational);
-
-    friend ostream& operator << (ostream&,Rational);
-    friend istream& operator >> (istream&,Rational&);
+    // Перегрузка сout
+    friend ostream& operator<< (ostream& os, const Rational&);
+    // Перегрузка сin
+    friend istream& operator>> (istream& is, Rational&);
 };
-
 #endif // RATIONAL_H

@@ -41,19 +41,18 @@ number TPolinom::getDiscriminant(){
 number* TPolinom::getRoots(){
     number * roots;
     if(getQuantityOfRoots()==2){
-
         roots = new number[2];
-        roots[0] = (-b + sqrt(getDiscriminant()))/(a*2);
-        roots[1] = (-b - sqrt(getDiscriminant()))/(a*2);
-//        if(!isValidRoots(roots,2)){
-//            roots = NULL;
-//        }
+        roots[0] = ((-b) + sqrt(getDiscriminant()))/(a*2);
+        roots[1] = ((-b) - sqrt(getDiscriminant()))/(a*2);
+        if(!isValidRoots(roots,2)){
+            roots = NULL;
+        }
     }else if(getQuantityOfRoots()==1){
         roots = new number[1];
          roots[0] = -b/(a*2);
-//         if(!isValidRoots(roots,1)){
-//             roots = NULL;
-//         }
+         if(!isValidRoots(roots,1)){
+             roots = NULL;
+         }
     }else{
         roots = NULL;
     }
@@ -62,7 +61,7 @@ number* TPolinom::getRoots(){
 
 bool TPolinom:: isValidRoots(number*roots,int quantityOfRoots){
     if(quantityOfRoots==2){
-        return (roots[0]+roots[1])==-(b/a) && roots[0]*roots[1]==(c/a) ;
+        return (roots[0]+roots[1])==-(b/a) && (roots[0]*roots[1])==(c/a) ;
     }else if(quantityOfRoots==1){
         return (roots[0]+roots[0])==-(b/a) && roots[0]*roots[0]==(c/a) ;
     }else{
