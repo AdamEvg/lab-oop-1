@@ -13,23 +13,23 @@ Rational::Rational(const int& numerator)
 }
 
 
-Rational Rational::operator+ (const Rational& Ratio)
+Rational Rational::operator+ (const Rational& rational)
 {
-    int NOK = getNOK(Ratio);
+    int NOK = getNOK(rational);
     Rational tmp;
-    int c1 = NOK/denominator, c2 = NOK/Ratio.denominator;
-    tmp.numerator = numerator*c1 + Ratio.numerator*c2;
+    int c1 = NOK/denominator, c2 = NOK/rational.denominator;
+    tmp.numerator = numerator*c1 + rational.numerator*c2;
     tmp.denominator = NOK;
     tmp.reduce();
     return tmp;
 }
 
-Rational Rational::operator- (const Rational& Ratio)
+Rational Rational::operator- (const Rational& rational)
 {
-    int NOK = getNOK(Ratio);
+    int NOK = getNOK(rational);
     Rational tmp;
-    int c1 = NOK/denominator, c2 = NOK/Ratio.denominator;
-    tmp.numerator = numerator*c1 - Ratio.numerator*c2;
+    int c1 = NOK/denominator, c2 = NOK/rational.denominator;
+    tmp.numerator = numerator*c1 - rational.numerator*c2;
     tmp.denominator = NOK;
     tmp.reduce();
     return tmp;
@@ -42,11 +42,11 @@ Rational Rational::operator- (){
     return tmp;
 }
 
-Rational Rational::operator* (const Rational& Ratio)
+Rational Rational::operator* (const Rational& rational)
 {
     Rational tmp;
-    tmp.numerator = numerator*Ratio.numerator;
-    tmp.denominator = denominator*Ratio.denominator;
+    tmp.numerator = numerator*rational.numerator;
+    tmp.denominator = denominator*rational.denominator;
     tmp.reduce();
     return tmp;
 }

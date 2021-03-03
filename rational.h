@@ -15,6 +15,7 @@ class Rational
     void reduce();
     // НОК
     unsigned int getNOK(const Rational&);
+    // НОД
     int getNOD(const int&,const int&);
 
 public:
