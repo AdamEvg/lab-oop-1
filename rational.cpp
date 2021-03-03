@@ -106,15 +106,15 @@ int Rational::getNOD(const int& a1,const int& b1)
 }
 
 bool Rational::operator > (int value){
-    return this->numerator > value;
+    return this->numerator > value*(int)this->denominator;
 }
 
 bool Rational::operator < (int value){
-    return this->numerator < value;
+    return this->numerator < value*(int)this->denominator;
 }
 
 bool Rational::operator == (int value){
-    return this->numerator == value;
+    return this->numerator == value*(int)this->denominator;
 }
 
 Rational sqrt(Rational rational){
