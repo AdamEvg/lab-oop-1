@@ -3,13 +3,20 @@
 
 Rational::Rational()
 {
-
+    this->numerator = 1;
+    this->denominator = 1;
 }
 
 Rational::Rational(const int& numerator)
 {
     this->numerator = numerator;
     this->denominator = 1;
+}
+
+Rational::Rational(const int& numerator,const int& denominator)
+{
+    this->numerator = numerator;
+    this->denominator = denominator;
 }
 
 

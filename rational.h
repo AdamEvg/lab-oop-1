@@ -21,6 +21,7 @@ class Rational
 public:
     Rational ();
     Rational(const int&);
+    Rational(const int&,const int&);
 
     // Перегруженный оператор +
     Rational operator+ (const Rational&);
